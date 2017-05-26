@@ -15,10 +15,15 @@ class Buttons {
     if (key == '8') {
      playerOne.selectorTwo(); 
     }
+    if (key == '7') {
+     playerOne.selectorThree(); 
+    }
 
     knife.handleKnifeButton();
+    if (playerOne.counter >= 1000){
     if (key == 't' && knife.x >= 1000) {
       knife.throwKnife();
+    }
     }
 
 

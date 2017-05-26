@@ -9,7 +9,7 @@ float yPos, xPos;
 boolean playerY, playerX, blocky, blockY;
 int state;
 float spotlightSize;
-PImage backgroundSet, menuScreenStart;
+PImage backgroundSet, menuScreenStart, menuScreenChange;
 Menu menuScreen;
 Minim minim;
 AudioPlayer song;
@@ -23,6 +23,7 @@ Buttons button;
 Noises newNoise;
 Bat bat;
 Knife knife;
+Rorscharch rorscharch;
 
 
 void setup() {
@@ -40,6 +41,7 @@ void setup() {
   start = false;
   coinSound = minim.loadFile("coinSound.wav");
   menuScreenStart = loadImage("menuScreen.jpg");
+  menuScreenChange = loadImage("backgroundRPG.jpg");
   backgroundSet = loadImage("newBackgroundTwo.png");
   myScore = new Score();
   playerOne = new Player();
@@ -50,6 +52,7 @@ void setup() {
   block.add(new Block());
   button = new Buttons();
   bat = new Bat();
+  rorscharch = new Rorscharch();
 }
 
 void draw() {

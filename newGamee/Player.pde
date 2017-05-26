@@ -10,7 +10,8 @@ class Player {
   float gravity;
   int state;
   int counter;
-  PImage frameOne, frameTwo, frameThree, walkNewOne, walkNewTwo, walkNewThree, walkAnotherOne, walkAnotherTwo, walkAnotherThree;
+  PImage frameOne, frameTwo, frameThree, walkNewOne, walkNewTwo, walkNewThree, walkAnotherOne, walkAnotherTwo, walkAnotherThree, 
+    walkPurpleGirlOne, walkPurpleGirlTwo, walkPurpleGirlThree;
   int num = 1;
   int frameCounter;
   int timeElapsed, selector;
@@ -30,15 +31,23 @@ class Player {
     frameOne = loadImage("frame"+num+".png");
     frameTwo = loadImage("frame2.png");
     frameThree  = loadImage("frame3.png");
+    
     walkNewOne = loadImage("walkNew1.png");
     walkNewTwo = loadImage("walkNew2.png");
+    
     walkNewThree = loadImage("walkNew3.png");
     walkAnotherOne = loadImage("moveGone.png");
     walkAnotherTwo = loadImage("moveGtwo.png");
     walkAnotherThree = loadImage("moveGthree.png");
+    
+    walkPurpleGirlOne = loadImage("walkPurpleOne.png");
+    walkPurpleGirlTwo = loadImage("walkPurpleTwo.png");
+    walkPurpleGirlThree = loadImage("walkPurpleThree.png");
+
 
     playerWidth = 20;
     playerHeight = 20;
+    
     xSpeed = 3;
     ySpeed = 3;
     pColor = (160);
@@ -68,6 +77,32 @@ class Player {
     if (selector == 1) {
     }
   }
+
+
+    void determineStateFour() {
+      if (selector == 3) {
+        int timeToWait = 0;
+        if (state == 0) {
+          timeToWait = timeFrameOneIsOn;
+          walkOneStep.play();
+        } else if (state == 1) {
+          timeToWait = timeFrameTwoIsOn;
+        } else if (state == 2) {
+          timeToWait = timeFrameThreeIsOn;
+          walkOneStep.rewind();
+        }
+
+
+        if (millis() >= timeElapsed + timeToWait) {
+          state++;
+          if (state == 3) {
+            state = 0;
+          }
+          timeElapsed = millis();
+        }
+      }
+    }
+  
   void determineStateThree() {
     if (selector == 2) {
       int timeToWait = 0;
@@ -76,9 +111,7 @@ class Player {
         walkOneStep.play();
       } else if (state == 1) {
         timeToWait = timeFrameTwoIsOn;
-        //walkOneStep.rewind();
       } else if (state == 2) {
-        //timeToWait = 0;
         timeToWait = timeFrameThreeIsOn;
         walkOneStep.rewind();
       }
@@ -148,6 +181,19 @@ class Player {
     }
   }
 
+  void useCorrectFrameFour() {
+    if (selector == 3) {
+      if (state == 0) {
+        purpleGirlFrameOne();
+      } else if (state == 1) {
+        purpleGirlFrameTwo();
+      } else if (state == 2) {
+        purpleGirlFrameThree();
+      }
+    }
+  }
+
+
   void useCorrectFrameThree() {
     if (selector == 2) {
       if (state == 0) {
@@ -199,6 +245,9 @@ class Player {
 
     determineStateThree();
     useCorrectFrameThree();
+    
+    determineStateFour();
+    useCorrectFrameFour();
   }  
   void move() {
     dy += yAcceleration;                               //acceleration changes the velocity
@@ -306,15 +355,6 @@ class Player {
   void frameThreeChange() {
     image(frameThree, xPos-20, yPos-47);
   }
-  void selectorOne() {
-    selector = 1;
-  }
-  void selectorZero() {
-    selector = 0;
-  }
-  void selectorTwo(){
-   selector = 2; 
-  }
 
   void frameOneChangeTwo() {
     image(walkNewOne, xPos-19, yPos-40);
@@ -337,5 +377,29 @@ class Player {
 
   void anotherFrameChangeThree() {
     image(walkAnotherThree, xPos-20, yPos-38);
+  }
+
+  void purpleGirlFrameOne() {
+    image(walkPurpleGirlOne, xPos-20, yPos-36);
+  }
+
+  void purpleGirlFrameTwo() {
+    image(walkPurpleGirlTwo, xPos-20, yPos-36);
+  }
+
+  void purpleGirlFrameThree() {
+    image(walkPurpleGirlThree, xPos-20, yPos-36);
+  }
+  void selectorOne() {
+    selector = 1;
+  }
+  void selectorZero() {
+    selector = 0;
+  }
+  void selectorTwo() {
+    selector = 2;
+  }
+  void selectorThree() {
+    selector = 3;
   }
 }

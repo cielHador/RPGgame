@@ -11,17 +11,17 @@ class Score {
   void addPoints() {
     theScore = playerOne.counter; 
     checkIfNewHighscore();
-    if (theScore == 2000) {
+    if (theScore == 3000) {
       block.add(new Block());
       monsterSoundScore.play();
     }
 
-    if (theScore == 3000) {
+    if (theScore == 5000) {
       monsterSoundScore.rewind();
       monsterSoundScore.play();
       block.add(new Block());
     }
-    if (theScore == 4000) {
+    if (theScore == 7000) {
       monsterSoundScore.rewind();
       monsterSoundScore.play();
       block.add(new Block());
